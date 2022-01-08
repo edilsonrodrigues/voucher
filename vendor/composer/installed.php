@@ -1,12 +1,12 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
-        'name' => 'itarget/voucher',
+        'reference' => '0326d95d0729c6ef949841f81e1b3016bc68bf26',
+        'name' => 'itarget/finance',
         'dev' => true,
     ),
     'versions' => array(
@@ -19,13 +19,13 @@
             'reference' => 'd56bf6102915de5702778fe20f2de3b2fe570b5b',
             'dev_requirement' => true,
         ),
-        'itarget/voucher' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+        'itarget/finance' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '0326d95d0729c6ef949841f81e1b3016bc68bf26',
             'dev_requirement' => false,
         ),
         'myclabs/deep-copy' => array(

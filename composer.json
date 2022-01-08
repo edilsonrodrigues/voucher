@@ -17,6 +17,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit --testdox --do-not-cache-result --configuration tests/phpunit.xml"
+        "test": "phpunit --testdox --do-not-cache-result --configuration tests/phpunit.xml",
+        "test:filter": "phpunit --testdox --do-not-cache-result --configuration tests/phpunit.xml --filter"
     }
 }
