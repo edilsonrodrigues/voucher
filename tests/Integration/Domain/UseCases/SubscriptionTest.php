@@ -24,7 +24,7 @@ class PaymentPlanRepositoryMemory  implements PaymentPlanRepository
     public function findById(int $id): PaymentPlan
     {
         $paymentPlan = new PaymentPlan();
-        $paymentPlan->id = 1;
+        $paymentPlan->id = 123;
         $paymentPlan->professionalCategoryId = 1;
         return $paymentPlan;
     }
