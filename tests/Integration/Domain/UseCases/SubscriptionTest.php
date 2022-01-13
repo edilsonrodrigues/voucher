@@ -9,12 +9,33 @@ use App\Domain\UseCases\MakeRegistration\MakeRegistration;
 use App\Infra\Repository\PersonRepositoryMemory;
 use PHPUnit\Framework\TestCase;
 
+class PaymentPlan
+{
+    public int $id;
+    public int $professionalCategoryId;
+}
+interface PaymentPlanRepository
+{
+    public function findById(int $id): PaymentPlan;
+}
+
+class PaymentPlanRepositoryMemory  implements PaymentPlanRepository
+{
+    public function findById(int $id): PaymentPlan
+    {
+        $paymentPlan = new PaymentPlan();
+        $paymentPlan->id = 1;
+        $paymentPlan->professionalCategoryId = 1;
+        return $paymentPlan;
+    }
+}
 class SubscriptionTest extends TestCase
 {
     public function testItShouldMakeSubscriptionWhenValidDataIsProvided()
     {
         $personRepo = new PersonRepositoryMemory();
-        $useCase = new MakeRegistration($personRepo);
+        $PaymentPlanRepo = new PaymentPlanRepositoryMemory();
+        $useCase = new MakeRegistration($personRepo, $PaymentPlanRepo);
         $inputData = new InputData;
 
         $inputData->personId = 1;
