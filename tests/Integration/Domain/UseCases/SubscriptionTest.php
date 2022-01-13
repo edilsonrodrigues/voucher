@@ -44,6 +44,7 @@ class SubscriptionTest extends TestCase
         $output = $useCase->execute($inputData);
 
         $this->assertEquals($output->personId, 1);
+        $this->assertEquals($output->paymentPlanId, 123);
         $this->assertNotEmpty($output->id);
     }
 }
