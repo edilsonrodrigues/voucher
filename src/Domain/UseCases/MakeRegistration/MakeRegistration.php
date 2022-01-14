@@ -2,8 +2,8 @@
 
 namespace App\Domain\UseCases\MakeRegistration;
 
+use App\Domain\Repository\PaymentPlanRepository;
 use App\Domain\Repository\PersonRepository;
-use Tests\Integration\Domain\UseCases\PaymentPlanRepository;
 
 class MakeRegistration
 {
