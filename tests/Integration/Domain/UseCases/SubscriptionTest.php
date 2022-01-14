@@ -17,8 +17,8 @@ class SubscriptionTest extends TestCase
     public function testItShouldMakeSubscriptionWhenValidDataIsProvided()
     {
         $personRepo = new PersonRepositoryMemory();
-        $PaymentPlanRepo = new PaymentPlanRepositoryMemory();
-        $useCase = new MakeRegistration($personRepo, $PaymentPlanRepo);
+        $paymentPlanRepo = new PaymentPlanRepositoryMemory();
+        $useCase = new MakeRegistration($personRepo, $paymentPlanRepo);
         $inputData = new InputData;
 
         $inputData->personId = 1;
@@ -31,8 +31,8 @@ class SubscriptionTest extends TestCase
         $this->assertNotEmpty($output->id);
     }
 
-    //  public function testItShouldApplyVoucherWhenItIsProvided()
-    // {
-    //    $codeVoucher = '12312312312312321';
-    // }
+    public function testItShouldApplyVoucherWhenItIsProvided()
+    {
+        $codeVoucher = '12312312312312321';
+    }
 }
