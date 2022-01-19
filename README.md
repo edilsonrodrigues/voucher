@@ -32,4 +32,4 @@ OBS: As configurações dos vouchers podem ser combinadas ex: voucher nominal do
 
     R6:  Na tentativa de aplicar um voucher exibir mensagem e não aplicar o desconto. ex de voucher invalido: voucher informado não encontrado na base; voucher informado que ja foi utilizado; voucher de uma atividade especifica que não está incluida no carrinho; voucher pertencer a outra pessoa; voucher fora do prazo de validade
 
-   R7: voucher com prefixo cadastrado de forma geral informando somente o desconto e centro de custo, sem especificar pessoa ou atividade. deve ser aplicado um voucher para cada atividade incluida no carrinho enquanto tiver voucher do prefixo cadastrado disponivel.
+    R7: voucher com prefixo cadastrado de forma geral informando somente o desconto e centro de custo, sem especificar pessoa ou atividade. deve ser aplicado um voucher para cada atividade incluida no carrinho enquanto tiver voucher do prefixo cadastrado disponivel.

@@ -4,35 +4,35 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Domain\UseCases;
 
+use App\Domain\Exception\EqualPersonOriginException;
 use App\Domain\UseCases\MakeRegistration\InputData as MakeRegistrationInputData;
 use App\Domain\UseCases\MakeRegistration\MakeRegistration;
 use App\Domain\UseCases\ApplyVoucher\ApplyVoucher;
 use App\Domain\UseCases\ApplyVoucher\InputData;
-use App\Domain\UseCases\ApplyVoucher\OutputData;
 use App\Infra\Repository\PaymentPlanRepositoryMemory;
 use App\Infra\Repository\PersonRepositoryMemory;
 use App\Infra\Repository\VoucherRepositoryMemory;
 use PHPUnit\Framework\TestCase;
-use stdClass;
-
 
 interface SubscriptionRepository
 {
-    public function findById(int $id);
+    public function findById(int $id): Subscription;
 }
-
+final class Subscription
+{
+    public int $id;
+    public int $personId;
+}
 class SubscriptionRepositoryMemory implements SubscriptionRepository
 {
-    public function findById(int $id)
+    public function findById(int $id): Subscription
     {
-        $std = new stdClass;
-        $std->id = 1;
-        $std->personId = 1;
+        $subscription = new Subscription;
+        $subscription->id = 1;
+        $subscription->personId = 1;
+        return $subscription;
     }
 }
-
-
-
 
 class SubscriptionTest extends TestCase
 {
@@ -65,6 +65,6 @@ class SubscriptionTest extends TestCase
 
         $output = $useCase->execute($inputData);
 
-        $this->assertEquals($output->id, 1);
+        $this->assertEquals($output->status, 2);
     }
 }

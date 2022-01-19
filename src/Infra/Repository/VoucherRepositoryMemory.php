@@ -11,6 +11,8 @@ class VoucherRepositoryMemory implements VoucherRepository
     {
         $voucher = new Voucher;
         $voucher->id = 1;
+        $voucher->originPersonId = 1;
+        $voucher->status = 1;
         return $voucher;
     }
 }

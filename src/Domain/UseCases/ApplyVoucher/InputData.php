@@ -6,4 +6,5 @@ class InputData
 {
     public int $subscriptionId;
     public string $voucherCode;
+    public int $personId;
 }
