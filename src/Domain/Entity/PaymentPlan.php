@@ -5,5 +5,6 @@ namespace App\Domain\Entity;
 class PaymentPlan
 {
     public int $id;
-    public int $professionalCategoryId;
+    public ProfessionalCategory $professionalCategory;
+    public Activity $activity;
 }

@@ -5,6 +5,7 @@ namespace App\Domain\UseCases\ApplyVoucher;
 class OutputData
 {
     public int $id;
-    public int $status;
-    public int $originPersonId;
+    public int $subscriptionId;
+    public float $priceDiscount;
+    public float $priceWithDiscount;
 }

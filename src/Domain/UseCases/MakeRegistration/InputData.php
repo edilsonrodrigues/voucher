@@ -6,4 +6,5 @@ class InputData
 {
     public int $paymentPlanId;
     public int $personId;
+    public string $createdAt;
 }

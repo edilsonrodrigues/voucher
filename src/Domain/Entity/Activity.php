@@ -2,8 +2,8 @@
 
 namespace App\Domain\Entity;
 
-class Voucher
+class Activity
 {
     public int $id;
-    public float $price;
+    public string $name;
 }
