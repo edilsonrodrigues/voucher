@@ -34,6 +34,10 @@ class ComposerStaticInitf2d6f8689942d0057685e1b7747b9405
             'Prophecy\\' => 9,
             'PhpParser\\' => 10,
         ),
+        'F' => 
+        array (
+            'Faker\\' => 6,
+        ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
@@ -71,6 +75,10 @@ class ComposerStaticInitf2d6f8689942d0057685e1b7747b9405
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
         'Doctrine\\Instantiator\\' => 
         array (

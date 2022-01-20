@@ -12,6 +12,7 @@ use App\Domain\UseCases\ApplyVoucher\InputData;
 use App\Infra\Repository\PaymentPlanRepositoryMemory;
 use App\Infra\Repository\PersonRepositoryMemory;
 use App\Infra\Repository\VoucherRepositoryMemory;
+use DomainException;
 use PHPUnit\Framework\TestCase;
 
 interface SubscriptionRepository
@@ -33,7 +34,15 @@ class SubscriptionRepositoryMemory implements SubscriptionRepository
         return $subscription;
     }
 }
-
+final class InvalidVoucherException extends DomainException
+{
+    public static function personOriginEqualpersonRegistration(): self
+    {
+        return new self(
+            'Esse Vouche nao pode ser usado por voce, voce e o master'
+        );
+    }
+}
 class SubscriptionTest extends TestCase
 {
     public function testItShouldMakeSubscriptionWhenValidDataIsProvided()
@@ -66,5 +75,19 @@ class SubscriptionTest extends TestCase
         $output = $useCase->execute($inputData);
 
         $this->assertEquals($output->status, 2);
+    }
+
+    public function testIfTheExceptionIsThrownWhenPersonOriginOfEqualSubscription()
+    {
+        $this->expectException(InvalidVoucherException::class);
+        $voucherRepo = new VoucherRepositoryMemory();
+        $subscriptionRepo = new SubscriptionRepositoryMemory();
+        $useCase = new ApplyVoucher($voucherRepo, $subscriptionRepo);
+
+        $inputData = new InputData();
+        $inputData->voucherCode = 'DESCONTO';
+        $inputData->subscriptionId = 1;
+        $inputData->personOriginId = 1;
+        $useCase->execute($inputData);
     }
 }

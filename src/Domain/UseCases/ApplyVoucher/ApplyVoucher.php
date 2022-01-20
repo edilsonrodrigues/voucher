@@ -4,6 +4,7 @@ namespace App\Domain\UseCases\ApplyVoucher;
 
 use App\Domain\Exception\EqualPersonOriginException;
 use App\Domain\Repository\VoucherRepository;
+use Tests\Integration\Domain\UseCases\InvalidVoucherException;
 use Tests\Integration\Domain\UseCases\SubscriptionRepository;
 
 class ApplyVoucher
@@ -16,6 +17,10 @@ class ApplyVoucher
     {
         $voucher =  $this->voucherRepo->findByVoucherCode($inputData->voucherCode);
         $subscription = $this->subscriptionRepo->findById($inputData->subscriptionId);
+
+        if ($voucher->originPersonId === $subscription->id) {
+            throw InvalidVoucherException::personOriginEqualpersonRegistration();
+        }
 
         $outputData = new OutputData;
         $outputData->id = $voucher->id;
