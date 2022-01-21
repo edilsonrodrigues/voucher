@@ -3,6 +3,7 @@
 namespace App\Infra\Repository;
 
 use App\Domain\Entity\Activity;
+use App\Domain\Entity\ActivitySchedule;
 use App\Domain\Entity\PaymentPlan;
 use App\Domain\Entity\ProfessionalCategory;
 use App\Domain\Repository\PaymentPlanRepository;
@@ -16,14 +17,19 @@ class PaymentPlanRepositoryMemory  implements PaymentPlanRepository
         $activity = new Activity();
 
         $activity->id = 1;
-        $activity->name = 'Curso';
+        $activity->description = 'Curso';
+
+        $activitySchedule = new ActivitySchedule();
+        $activitySchedule->id = 1;
+        $activitySchedule->description = 'Curso primeiro horario';
+        $activitySchedule->activity = $activity;
 
         $professionalCategory->id = 1;
-        $professionalCategory->name = 'Medico';
+        $professionalCategory->description = 'Medico';
 
         $paymentPlan->id = 123;
         $paymentPlan->professionalCategory = $professionalCategory;
-        $paymentPlan->activity =  $activity;
+        $paymentPlan->activitySchedule =  $activitySchedule;
         $paymentPlan->price = 100;
 
         return $paymentPlan;

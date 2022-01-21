@@ -2,8 +2,9 @@
 
 namespace App\Domain\Entity;
 
-class Activity
+class ActivitySchedule
 {
     public int $id;
     public string $description;
+    public Activity $activity;
 }
