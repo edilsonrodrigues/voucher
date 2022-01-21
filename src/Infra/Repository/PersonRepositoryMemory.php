@@ -7,12 +7,24 @@ use App\Domain\Repository\PersonRepository;
 
 class PersonRepositoryMemory implements PersonRepository
 {
-    public function findById(int $id): Person
+    public function __construct(private array $storage = [])
     {
         $person = new Person;
         $person->id = 1;
         $person->name = 'Edilson';
         $person->email = 'edilson@itarget.com.br';
-        return $person;
+        $this->storage[] = $person;
+    }
+
+    public function findById(int $id): ?Person
+    {
+        $person = array_filter(
+            $this->storage,
+            function ($person) use ($id) {
+                return $person->id == $id;
+            }
+        );
+
+        return count($person) ? current($person) : null;
     }
 }

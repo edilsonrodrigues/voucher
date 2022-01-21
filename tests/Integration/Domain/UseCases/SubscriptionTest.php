@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Domain\UseCases;
 
+use App\Domain\Exception\InvalidSubscriptionException;
 use App\Domain\UseCases\ApplyVoucher\ApplyVoucher;
 use App\Domain\UseCases\ApplyVoucher\InputData;
 use App\Domain\UseCases\MakeRegistration\InputData as MakeRegistrationInputData;
@@ -74,6 +75,18 @@ class SubscriptionTest extends TestCase
 
     public function testIfTheExceptionIsThrownWhenPersonIsInvalid()
     {
-        $this->expectException(InvalidVoucherException::class);
+        $this->expectException(InvalidSubscriptionException::class);
+
+        //Criando uma inscrição
+        $personRepo = new PersonRepositoryMemory();
+        $paymentPlanRepo = new PaymentPlanRepositoryMemory();
+        $subscriptionRepo = new SubscriptionRepositoryMemory();
+        $useCase = new MakeRegistration($personRepo, $paymentPlanRepo, $subscriptionRepo);
+        $inputData = new MakeRegistrationInputData;
+
+        $inputData->personId = 2;
+        $inputData->paymentPlanId = 123;
+        $inputData->createdAt = '2022-01-01 20:00:00';
+        $useCase->execute($inputData);
     }
 }
