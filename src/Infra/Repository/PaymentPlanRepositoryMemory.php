@@ -44,7 +44,6 @@ class PaymentPlanRepositoryMemory  implements PaymentPlanRepository
                 return $paymentPlan->id == $id;
             }
         );
-        print_r($paymentPlan);
         return count($paymentPlan) ? current($paymentPlan) : null;
     }
 }

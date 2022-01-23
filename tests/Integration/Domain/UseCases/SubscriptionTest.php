@@ -6,6 +6,7 @@ namespace Tests\Integration\Domain\UseCases;
 
 use App\Domain\Exception\InvalidPaymentPlanException;
 use App\Domain\Exception\InvalidSubscriptionException;
+use App\Domain\Exception\InvalidVoucherException;
 use App\Domain\UseCases\ApplyVoucher\ApplyVoucher;
 use App\Domain\UseCases\ApplyVoucher\InputData;
 use App\Domain\UseCases\MakeRegistration\InputData as MakeRegistrationInputData;
@@ -105,6 +106,34 @@ class SubscriptionTest extends TestCase
         $inputData->personId = 1;
         $inputData->paymentPlanId = 1;
         $inputData->createdAt = '2022-01-01 20:00:00';
+        $useCase->execute($inputData);
+    }
+
+    public function testIfTheExceptionIsThrownWhenVoucherIsInvalid()
+    {
+        $this->expectException(InvalidVoucherException::class);
+
+        //Criando uma inscrição
+        $personRepo = new PersonRepositoryMemory();
+        $paymentPlanRepo = new PaymentPlanRepositoryMemory();
+        $subscriptionRepo = new SubscriptionRepositoryMemory();
+        $useCase = new MakeRegistration($personRepo, $paymentPlanRepo, $subscriptionRepo);
+        $inputData = new MakeRegistrationInputData;
+
+        $inputData->personId = 1;
+        $inputData->paymentPlanId = 123;
+        $inputData->createdAt = '2022-01-01 20:00:00';
+        $outputSubscription = $useCase->execute($inputData);
+
+        //Criando o voucher
+        $subscriptionRepo = new SubscriptionRepositoryMemory();
+        $voucherRepo = new VoucherRepositoryMemory();
+        $useCase = new ApplyVoucher($voucherRepo, $subscriptionRepo);
+
+        $inputData = new InputData();
+        $inputData->voucherCode = 'DESCONTO2';
+        $inputData->subscriptionId = $outputSubscription->id;
+
         $useCase->execute($inputData);
     }
 }

@@ -6,5 +6,5 @@ use App\Domain\Entity\Voucher;
 
 interface VoucherRepository
 {
-    public function findByVoucherCode(string $voucherCode): Voucher;
+    public function findByVoucherCode(string $voucherCode): ?Voucher;
 }

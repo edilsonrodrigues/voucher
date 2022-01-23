@@ -6,10 +6,10 @@ use DomainException;
 
 final class InvalidVoucherException extends DomainException
 {
-    public static function personOriginEqualpersonRegistration(): self
+    public static function voucherIsNotValid(): self
     {
         return new self(
-            'Esse Vouche nao pode ser usado por voce, voce e o master'
+            'Voucher nao encontrado'
         );
     }
 }

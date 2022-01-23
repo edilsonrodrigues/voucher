@@ -2,10 +2,9 @@
 
 namespace App\Domain\UseCases\ApplyVoucher;
 
-use App\Domain\Exception\EqualPersonOriginException;
+use App\Domain\Exception\InvalidVoucherException;
 use App\Domain\Repository\SubscriptionRepository;
 use App\Domain\Repository\VoucherRepository;
-use Tests\Integration\Domain\UseCases\InvalidVoucherException;
 
 class ApplyVoucher
 {
@@ -18,6 +17,11 @@ class ApplyVoucher
         $subscription = $this->subscriptionRepo->findById($inputData->subscriptionId);
 
         $voucher =  $this->voucherRepo->findByVoucherCode($inputData->voucherCode);
+
+        if (!$voucher) {
+            throw InvalidVoucherException::voucherIsNotValid();
+        }
+
         $subscription->applyVoucher($voucher);
 
         $outputData = new OutputData;
