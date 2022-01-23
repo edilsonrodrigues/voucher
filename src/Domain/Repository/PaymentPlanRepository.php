@@ -6,5 +6,5 @@ use App\Domain\Entity\PaymentPlan;
 
 interface PaymentPlanRepository
 {
-    public function findById(int $id): PaymentPlan;
+    public function findById(int $id): ?PaymentPlan;
 }

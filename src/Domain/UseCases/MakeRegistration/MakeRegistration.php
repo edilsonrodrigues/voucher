@@ -3,6 +3,7 @@
 namespace App\Domain\UseCases\MakeRegistration;
 
 use App\Domain\Entity\Subscription;
+use App\Domain\Exception\InvalidPaymentPlanException;
 use App\Domain\Exception\InvalidSubscriptionException;
 use App\Domain\Repository\PaymentPlanRepository;
 use App\Domain\Repository\PersonRepository;
@@ -27,6 +28,10 @@ class MakeRegistration
         }
 
         $paymentPlan = $this->paymentPlanRepo->findById($inputData->paymentPlanId);
+
+        if (!$paymentPlan) {
+            throw InvalidPaymentPlanException::paymentPlanIsNotValid();
+        }
 
         $subscription = new Subscription();
         $subscription->person = $person;

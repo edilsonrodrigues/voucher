@@ -10,7 +10,8 @@ use App\Domain\Repository\PaymentPlanRepository;
 
 class PaymentPlanRepositoryMemory  implements PaymentPlanRepository
 {
-    public function findById(int $id): PaymentPlan
+
+    public function __construct(private array $storage = [])
     {
         $paymentPlan = new PaymentPlan();
         $professionalCategory = new ProfessionalCategory();
@@ -32,6 +33,18 @@ class PaymentPlanRepositoryMemory  implements PaymentPlanRepository
         $paymentPlan->activitySchedule =  $activitySchedule;
         $paymentPlan->price = 100;
 
-        return $paymentPlan;
+        $this->storage[] = $paymentPlan;
+    }
+
+    public function findById(int $id): ?PaymentPlan
+    {
+        $paymentPlan = array_filter(
+            $this->storage,
+            function ($paymentPlan) use ($id) {
+                return $paymentPlan->id == $id;
+            }
+        );
+        print_r($paymentPlan);
+        return count($paymentPlan) ? current($paymentPlan) : null;
     }
 }
